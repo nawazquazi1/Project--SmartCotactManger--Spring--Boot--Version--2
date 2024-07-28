@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" th:replace="~{base :: parent(~{::#content},~{::title},~{::script})}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Contact Manager - Home</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f9fa;
+      color: #343a40;
+    }
+    .container {
+      margin-top: 50px;
+    }
+    .card {
+      margin-top: 30px;
+      transition: transform 0.2s;
+    }
+    .card:hover {
+      transform: scale(1.05);
+    }
+    .blog-title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    .blog-content {
+      margin-bottom: 20px;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animated {
+      animation: fadeIn 1s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+<div class="container">
+  <header class="text-center">
+    <h1 class="animated">Welcome to Smart Contact Manager</h1>
+    <p class="animated">Your reliable solution for managing contacts efficiently in the cloud.</p>
+  </header>
+  <section id="content" class="text-center">
+    <h2 class="animated">About Smart Contact Manager</h2>
+    <p class="animated">Smart Contact Manager is designed to help you store and manage your contacts securely in the cloud. With our application, you can easily access your contacts from any device, ensuring you never lose important information.</p>
+  </section>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Benefits of Saving Contacts in the Cloud</h5>
+          <p class="card-text">Storing contacts in the cloud offers numerous benefits, including easy access from any device, data backup, and enhanced security. With Smart Contact Manager, you can ensure your contacts are safe and accessible whenever you need them.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">How to Use Smart Contact Manager</h5>
+          <p class="card-text">Using Smart Contact Manager is simple and straightforward. Start by signing up for an account, then log in to access the dashboard. From there, you can add, edit, or delete contacts. The user-friendly interface ensures a seamless experience.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Why Choose Smart Contact Manager?</h5>
+          <p class="card-text">Smart Contact Manager stands out for its ease of use, robust security features, and reliable cloud storage. Our application is designed to meet the needs of both individuals and businesses, providing a scalable solution for contact management.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Steps to Get Started with Smart Contact Manager</h5>
+          <p class="card-text">Getting started with Smart Contact Manager is quick and easy. First, sign up for an account. Next, log in and navigate to the dashboard. From there, you can start adding your contacts. Our application also supports bulk uploads, making it easy to import existing contacts.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Best Practices for Managing Contacts</h5>
+          <p class="card-text">Effective contact management involves regularly updating contact details, categorizing contacts for easy retrieval, and backing up your contact list. Smart Contact Manager provides all the tools you need to manage your contacts efficiently.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Additional Features of Smart Contact Manager</h5>
+          <p class="card-text">Smart Contact Manager offers additional features such as contact grouping, email integration, and analytics to help you gain insights into your contact interactions. Our application is constantly evolving to meet your needs.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  console.log("Home page");
+</script>
+</body>
+</html>
