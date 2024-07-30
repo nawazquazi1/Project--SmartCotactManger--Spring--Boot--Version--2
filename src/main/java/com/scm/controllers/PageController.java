@@ -1,12 +1,15 @@
 package com.scm.controllers;
 
 import com.scm.Entities.User;
+import com.scm.Exception.ResourceNotFoundException;
 import com.scm.Helper.Message;
 import com.scm.Helper.MessageType;
+import com.scm.Repo.UserRepo;
 import com.scm.forms.UserForm;
 import com.scm.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +22,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
+@AllArgsConstructor
 public class PageController {
 
     private static final Logger log = LoggerFactory.getLogger(PageController.class);
-    @Autowired
+
+    private UserRepo userRepo;
     private UserService userService;
 
     @GetMapping("/")
@@ -58,26 +63,24 @@ public class PageController {
 
     @GetMapping("/contact")
     public String contact() {
-        return new String("contact");
+        return "contact";
     }
 
 
     @GetMapping("/login")
     public String login() {
-        return new String("login");
+        return "login";
     }
 
 
     @GetMapping("/register")
     public String register(Model model) {
-
         UserForm userForm = new UserForm();
         model.addAttribute("userForm", userForm);
-
         return "register";
     }
 
-    // processing register
+
 
     @RequestMapping(value = "/do-register", method = RequestMethod.POST)
     public String processRegister(@Valid @ModelAttribute UserForm userForm, BindingResult bindingResult,
@@ -88,22 +91,31 @@ public class PageController {
         if (bindingResult.hasErrors()) {
             return "register";
         }
+        if (this.userRepo.existsByEmail(userForm.getEmail())) {
+            Message message = Message.builder().content("Email Already In Use").type(MessageType.red).build();
+            session.setAttribute("message", message);
+            return "redirect:/register";
+        } if (this.userRepo.existsByPhoneNumber(userForm.getPhoneNumber())) {
+            Message message = Message.builder().content("This Phone Number is  Already In Use").type(MessageType.red).build();
+            session.setAttribute("message", message);
+            return "redirect:/register";
+        }
+            User user = new User();
+            user.setName(userForm.getName());
+            user.setEmail(userForm.getEmail());
+            user.setPassword(userForm.getPassword());
+            user.setAbout(userForm.getAbout());
+            user.setPhoneNumber(userForm.getPhoneNumber());
+            user.setEnabled(false);
+            user.setProfilePic(
+                    "https://www.learncodewithdurgesh.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdurgesh_sir.35c6cb78.webp&w=1920&q=75");
 
-        User user = new User();
-        user.setName(userForm.getName());
-        user.setEmail(userForm.getEmail());
-        user.setPassword(userForm.getPassword());
-        user.setAbout(userForm.getAbout());
-        user.setPhoneNumber(userForm.getPhoneNumber());
-        user.setEnabled(false);
-        user.setProfilePic(
-                "https://www.learncodewithdurgesh.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fdurgesh_sir.35c6cb78.webp&w=1920&q=75");
+            User savedUser = userService.saveUser(user);
+            System.out.println("user saved :");
+            Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();
+            session.setAttribute("message", message);
+            return "redirect:/register";
 
-        User savedUser = userService.saveUser(user);
-        System.out.println("user saved :");
-        Message message = Message.builder().content("Registration Successful").type(MessageType.green).build();
-        session.setAttribute("message", message);
-        return "redirect:/register";
     }
 
 

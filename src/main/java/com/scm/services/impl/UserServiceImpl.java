@@ -21,7 +21,6 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-@RequiredArgsConstructor
 @AllArgsConstructor
 public class UserServiceImpl implements UserService {
 
