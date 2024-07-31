@@ -33,7 +33,7 @@ public class Helper {
     }
 
     public static String getLinkForEmailVerification(String emailToken) {
-        return "http://localhost:8081/auth/verify-email?token=" + emailToken;
+        return "http://localhost:1010/auth/verify-email?token=" + emailToken;
     }
 
 }
